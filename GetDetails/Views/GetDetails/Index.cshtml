@@ -1,0 +1,52 @@
+﻿@using System.Data;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    
+    <form action="/GetDetails/Index" method="post">
+        <table border="1">
+            <tr bgcolor="yellow">
+                <th>ID</th>
+                <th>XMLSerialNo</th>
+                <th>XMLPayorBankRoutNo</th>
+                <th>XMLSAN</th>
+                <th>XMLTransCode</th>
+                <th>XMLAmount</th>
+                <th>DbtAccNo</th>
+                <th>ReturnCode</th>
+                <th><input type="submit" name="cbutton" Value="send"></th>
+
+
+            </tr>
+            
+                @foreach (DataRow row in Model.Rows)
+                {
+            <tr>
+                <td>@row["ID"]</td>
+                <td>@row["XMLSerialNo"]</td>    
+                <td>@row["XMLPayorBankRoutNo"]</td>
+                <td>@row["XMLSAN"]</td>
+                <td>@row["XMLTransCode"]</td>
+                <td>@row["XMLAmount"]</td>
+                <td>@row["DbtAccNo"]</td>
+                <td>@row["ReturnCode"]</td>
+                <td>@Html.ActionLink("Unmark", "Unmark", new { id = @row["ID"] })</td>
+                @*<td><input type="submit" name="cbutton" value="Unmark" /></td>*@
+
+            </tr>
+            }
+               
+            </table>
+    </form>
+</body>
+</html>
