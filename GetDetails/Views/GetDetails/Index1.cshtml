@@ -1,0 +1,86 @@
+﻿@model IEnumerable<GetDetails.Models.CustomerVM>
+
+@{
+    ViewBag.Title = "Index1";
+}
+
+<h2>Index1</h2>
+
+<form action="/GetDetails/Index1" method="post">
+    <p>
+        <input type="submit" name="cbutton" Value="send">
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XMLSerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XMLPayorBankRoutNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XMLSAN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XMLTransCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XMLAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbtAccNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnCode)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XMLSerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XMLPayorBankRoutNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XMLSAN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XMLTransCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.XMLAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DbtAccNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnCode)
+            </td>
+            <td>
+                @*@Html.ActionLink("Unmark", "Index1", new { ID = "100" })*@
+                <form action="/GetDetails/Index1" method="post">
+            <p>
+                <input type="submit" name="cbutton" Value="Unmark">
+            </p>
+        </form>
+                @*@using (Html.BeginForm("Index1", "GetDetails", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => item.ID) <input type="submit" name="cbutton" value="Unmark" />
+            <input type="button" name="Index1" value="unmark" onclick="location.href='<%: Url.Action("Action", "Controller")+ item.ID" %>'" />
+        }*@
+            </td>
+        </tr>
+    }
+
+</table>

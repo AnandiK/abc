@@ -1,6 +1,10 @@
-﻿@using System.Data;
+﻿
+@using System.Data;
+
 
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -10,9 +14,24 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script>
+        function GetDetails(ID) {
+            var data = {};
+            data["ID"] + ID;
+            $.ajax({
+                type: POST,
+                async: false,
+                url: './GetDetails/Unmark',
+                data: data,
+                datatype: json,
+                success: successfunc,
+                error: errorfunc,
+            })
+        }
+    </script>
 </head>
 <body>
-    
+
     <form action="/GetDetails/Index" method="post">
         <table border="1">
             <tr bgcolor="yellow">
@@ -25,28 +44,38 @@
                 <th>DbtAccNo</th>
                 <th>ReturnCode</th>
                 <th><input type="submit" name="cbutton" Value="send"></th>
+                @*<input type="button"
+                    value="send"
+                    onclick="location.href='<%: Url.Action(" index", "GetDetails" ) % />'" />*@
 
 
             </tr>
-            
-                @foreach (DataRow row in Model.Rows)
-                {
+
+            @foreach (DataRow row in Model.Rows)
+            {
             <tr>
                 <td>@row["ID"]</td>
-                <td>@row["XMLSerialNo"]</td>    
+                <td>@row["XMLSerialNo"]</td>
                 <td>@row["XMLPayorBankRoutNo"]</td>
                 <td>@row["XMLSAN"]</td>
                 <td>@row["XMLTransCode"]</td>
                 <td>@row["XMLAmount"]</td>
                 <td>@row["DbtAccNo"]</td>
                 <td>@row["ReturnCode"]</td>
-                <td>@Html.ActionLink("Unmark", "Unmark", new { id = @row["ID"] })</td>
-                @*<td><input type="submit" name="cbutton" value="Unmark" /></td>*@
+
+                @using (Html.BeginForm("Index", "GetDetails", FormMethod.Post))
+                {
+                    <td>
+                        @Html.HiddenFor(ID => @row["ID"])
+                    <input type="submit" name="cbutton" value="Unmark" />
+                </td>
+            }
+                @*<td><input type="submit" name="cbutton" Value="unmark"></td>*@
 
             </tr>
             }
-               
-            </table>
+
+        </table>
     </form>
 </body>
 </html>
